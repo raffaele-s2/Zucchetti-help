@@ -37,7 +37,7 @@ files = st.file_uploader(
 )
 
 
-if files:
+if files and "db" not in st.session_state:
 
     documents=[]
 
@@ -80,6 +80,7 @@ if files:
 
 
     st.session_state.db=db
+    st.session_state.indexed = True
 
 
     st.success(
@@ -88,7 +89,7 @@ if files:
 
 
 
-if "db" in st.session_state:
+if "db" in st.session_state and st.session_state.get("indexed"):
 
     domanda=st.chat_input(
         "Fai una domanda sui documenti..."
